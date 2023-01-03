@@ -24,12 +24,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import studentnotes.Notes;
+import studentnotes.Auxiliar;
 
 /**
  * FXML Controller class
@@ -53,19 +56,35 @@ public class MainApplicationController implements Initializable {
     TableColumn<Notes, String> content;
     @FXML
     TableColumn<Notes, Notes> action;
+    @FXML
+    TextField searchField;
+    
     List<Notes> notesList = new ArrayList<Notes>();
 
-    public void handleButtonPress(ActionEvent event) throws IOException {
-        URL fxmlUrl = this.getClass().getResource("/addtableitems/addtableitems.fxml");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(fxmlUrl);
-        AnchorPane root = loader.load();
+    public void handleNewButton(ActionEvent event) {
 
-        Scene scene = new Scene(root, 600, 600);
-        Stage stage = new Stage();
-        stage.setTitle("Add to table!");
-        stage.setScene(scene);
-        stage.show();
+        try {
+            URL fxmlUrl = this.getClass().getResource("/addtableitems/addtableitems.fxml");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(fxmlUrl);
+            AnchorPane root = loader.load();
+
+            Scene scene = new Scene(root, 600, 600);
+            Stage stage = new Stage();
+            Auxiliar.setStage(stage);
+            stage.setTitle("Add to table!");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApplicationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    List<Notes>searchList=new ArrayList<Notes>();
+    
+    public void handleSearchButton(ActionEvent event) {
+
+        
     }
 
     private void printList() {
@@ -80,22 +99,22 @@ public class MainApplicationController implements Initializable {
         table.getItems().addAll(notesList);
     }
 
-    public String generateDate() {
-        LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDate = myDateObj.format(myFormatObj);
-        return formattedDate;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        notesList.add(new Notes("mate", Auxiliar.generateDate(), "gfdhhdf"));
+        notesList.add(new Notes("romana", Auxiliar.generateDate(), "gfdfdhdfhfd"));
+        notesList.add(new Notes("engl", Auxiliar.generateDate(), "gfdfdhdfhfd"));
+        notesList.add(new Notes("ger", Auxiliar.generateDate(), "gfdfdhdfhfd"));
+        notesList.add(new Notes("muz", Auxiliar.generateDate(), "gfdfdhdfhfd"));
+
+        Auxiliar.setList(notesList);
+        Auxiliar.setTable(table);
 
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         content.setCellValueFactory(new PropertyValueFactory<>("content"));
         action.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-
-       
 
         action.setCellFactory((tableColumn) -> {
             TableCell<Notes, Notes> tableCell = new TableCell<Notes, Notes>() {
@@ -113,6 +132,7 @@ public class MainApplicationController implements Initializable {
 
                         @Override
                         public void handle(ActionEvent t) {
+                            Auxiliar.setNoteItem(item);
                             openUpdateWindow();
                         }
                     });
@@ -121,29 +141,20 @@ public class MainApplicationController implements Initializable {
 
                         @Override
                         public void handle(ActionEvent t) {
+                            Auxiliar.setNoteItem(item);
                             openDeleteWindow();
-
                         }
                     });
                     if (!empty) {
-
                         this.setGraphic(actionBox);
-
                     }
                 }
             };
 
             return tableCell;
         });
-
-        notesList.add(new Notes("mate",generateDate(), "gfdhhdf"));
-        notesList.add(new Notes("romana", generateDate(),"gfdfdhdfhfd"));
-        notesList.add(new Notes("engl", generateDate(),"gfdfdhdfhfd"));
-        notesList.add(new Notes("ger",generateDate(), "gfdfdhdfhfd"));
-        notesList.add(new Notes("muz", generateDate(),"gfdfdhdfhfd"));
-        printList();
         table.getItems().addAll(notesList);
-        // printList();
+
     }
 
     public void openUpdateWindow() {
@@ -156,7 +167,9 @@ public class MainApplicationController implements Initializable {
             Scene scene = new Scene(root, 600, 600);
 
             Stage stage = new Stage();
+            Auxiliar.setStage(stage);
             stage.setTitle("Update table!");
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -165,6 +178,7 @@ public class MainApplicationController implements Initializable {
     }
 
     public void openDeleteWindow() {
+
         try {
             URL fxmlUrl = this.getClass().getResource("/deletetableitems/deletetableitems.fxml");
             FXMLLoader loader = new FXMLLoader();
@@ -174,12 +188,11 @@ public class MainApplicationController implements Initializable {
             Scene scene = new Scene(root, 600, 600);
 
             Stage stage = new Stage();
+            Auxiliar.setStage(stage);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Delete from table!");
             stage.setScene(scene);
             stage.show();
-//                            notesList.remove(item);
-//                            refreshTable();
-//                            printList();
         } catch (IOException ex) {
             Logger.getLogger(MainApplicationController.class.getName()).log(Level.SEVERE, null, ex);
         }

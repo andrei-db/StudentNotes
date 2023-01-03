@@ -12,7 +12,7 @@
         <URL value="@mainapplication.css" />
     </stylesheets>
    <children>
-      <Button fx:id="newBtn" layoutX="51.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleButtonPress" text="New" />
+      <Button fx:id="newBtn" layoutX="51.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleNewButton" text="New" />
       <TableView fx:id="table" layoutX="25.0" layoutY="108.0" prefHeight="268.0" prefWidth="555.0">
         <columns>
           <TableColumn fx:id="title" prefWidth="131.0" text="Title" />
@@ -21,7 +21,7 @@
             <TableColumn fx:id="action" prefWidth="125.0" text="Action" />
         </columns>
       </TableView>
-      <TextField layoutX="354.0" layoutY="52.0" />
-      <Button layoutX="506.0" layoutY="50.0" mnemonicParsing="false" text="Search" />
+      <TextField fx:id="searchField" layoutX="354.0" layoutY="52.0" />
+      <Button layoutX="506.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleSearchButton"  text="Search" />
    </children>
 </AnchorPane>
