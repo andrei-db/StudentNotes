@@ -2,13 +2,26 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="mainapplication.MainApplicationController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainapplication.MainApplicationController">
     <stylesheets>
-        <URL value="@mainaplication.css" />
+        <URL value="@mainapplication.css" />
     </stylesheets>
    <children>
-      <Button layoutX="263.0" layoutY="8.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="newBtn" layoutX="51.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleButtonPress" text="New" />
+      <TableView fx:id="table" layoutX="25.0" layoutY="108.0" prefHeight="268.0" prefWidth="555.0">
+        <columns>
+          <TableColumn fx:id="title" prefWidth="131.0" text="Title" />
+          <TableColumn fx:id="date" prefWidth="143.0" text="Date" />
+            <TableColumn fx:id="content" prefWidth="155.0" text="Content" />
+            <TableColumn fx:id="action" prefWidth="125.0" text="Action" />
+        </columns>
+      </TableView>
+      <TextField layoutX="354.0" layoutY="52.0" />
+      <Button layoutX="506.0" layoutY="50.0" mnemonicParsing="false" text="Search" />
    </children>
 </AnchorPane>
