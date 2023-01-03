@@ -113,11 +113,7 @@ public class MainApplicationController implements Initializable {
 
                         @Override
                         public void handle(ActionEvent t) {
-                            updateTable();
-                            item.setDate(generateDate());
-                            //notesList.remove(item);
-                          refreshTable();
-                          printList();
+                            openUpdateWindow();
                         }
                     });
 
@@ -125,7 +121,7 @@ public class MainApplicationController implements Initializable {
 
                         @Override
                         public void handle(ActionEvent t) {
-                            deleteFromTable();
+                            openDeleteWindow();
 
                         }
                     });
@@ -150,7 +146,7 @@ public class MainApplicationController implements Initializable {
         // printList();
     }
 
-    public void updateTable() {
+    public void openUpdateWindow() {
         try {
             URL fxmlUrl = this.getClass().getResource("/updatetableitems/updatetableitems.fxml");
             FXMLLoader loader = new FXMLLoader();
@@ -168,7 +164,7 @@ public class MainApplicationController implements Initializable {
         }
     }
 
-    public void deleteFromTable() {
+    public void openDeleteWindow() {
         try {
             URL fxmlUrl = this.getClass().getResource("/deletetableitems/deletetableitems.fxml");
             FXMLLoader loader = new FXMLLoader();
