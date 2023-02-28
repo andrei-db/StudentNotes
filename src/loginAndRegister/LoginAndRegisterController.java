@@ -4,7 +4,8 @@
  */
 package loginAndRegister;
 
-import mainapplication.Database;
+import application.Database;
+import application.GetData;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -83,12 +84,15 @@ public class LoginAndRegisterController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("Successfully Login!");
                     alert.showAndWait();
+                    
+                    GetData.setUsername(usernameLogin.getText());
+                            
 
                     loginBtn.getScene().getWindow().hide();
 
                     Parent root;
                     try {
-                        root = FXMLLoader.load(getClass().getResource("/mainapplication/mainapplication.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("/application/StudentNotes.fxml"));
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
                         stage.setScene(scene);
