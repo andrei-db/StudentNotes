@@ -21,6 +21,7 @@ public class GetData {
     private static Stage addNotesWindow;
     private static Stage updateNotesWindow;
     private static Stage deleteNotesWindow;
+    private static TableView tableView;
 
     public static void setUsername(String user){
         username=user;
@@ -49,6 +50,14 @@ public class GetData {
 
     public static Stage getDeleteNotesWindow() {
         return deleteNotesWindow;
+    }
+
+    public static TableView getTableView() {
+        return tableView;
+    }
+
+    public static void setTableView(TableView tableView) {
+        GetData.tableView = tableView;
     }
 
 }

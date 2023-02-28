@@ -198,6 +198,7 @@ public class StudentNotesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        GetData.setTableView(table);
         showNotesData();
         
        
