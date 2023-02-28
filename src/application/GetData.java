@@ -22,6 +22,7 @@ public class GetData {
     private static Stage updateNotesWindow;
     private static Stage deleteNotesWindow;
     private static TableView tableView;
+    private static Notes currentItem;
 
     public static void setUsername(String user){
         username=user;
@@ -58,6 +59,13 @@ public class GetData {
 
     public static void setTableView(TableView tableView) {
         GetData.tableView = tableView;
+    }
+
+    public static void setCurrentItem(Notes item) {
+        currentItem=item;
+    }
+    public static Notes getCurrentItem() {
+        return currentItem;
     }
 
 }

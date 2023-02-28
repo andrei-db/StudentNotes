@@ -32,69 +32,40 @@ import javafx.stage.Stage;
  *
  * @author andreidb
  */
-public class CRUDController implements Initializable {
+public class AddController implements Initializable {
+
 
     @FXML
-    private Button cancelBtnAddNotesWindow;
+    private TextArea content;
     @FXML
-    private Button cancelBtnUpdateNotesWindow;
+    private TextField title;
+
 
     @FXML
-    private Button cancelBtnDeleteNotesWindow;
+    private Button okBtn;
+    @FXML
+    private Button cancelBtn;
 
-    @FXML
-    private TextArea contentAddNotesWindow;
-    @FXML
-    private TextField titleAddNotesWindow;
-
-    @FXML
-    private Button okBtnAddNotesWindow;
-    @FXML
-    private Button okBtnUpdateNotesWindow;
-    @FXML
-    private Button okBtnDeleteNotesWindow;
-    
     
     PreparedStatement prepare;
     ResultSet result;
     Connection connect;
 
     public void addNotesHandleButtons(ActionEvent event) {
-        if (event.getSource() == okBtnAddNotesWindow) {
+        if (event.getSource() == okBtn) {
             addNotes();
-        } else if (event.getSource() == cancelBtnAddNotesWindow) {
+        } else if (event.getSource() == cancelBtn) {
             canceWindow(GetData.getAddNotesWindow());
         }
 
     }
 
-    public void updateNotesHandleButtons(ActionEvent event) {
-        if (event.getSource() == okBtnUpdateNotesWindow) {
-            updateNotes();
-        } else if (event.getSource() == cancelBtnUpdateNotesWindow) {
-            canceWindow(GetData.getUpdateNotesWindow());
-        }
 
-    }
-
-    public void deleteNotesHandleButtons(ActionEvent event) {
-        if (event.getSource() == okBtnDeleteNotesWindow) {
-            deleteNotes();
-        } else if (event.getSource() == cancelBtnDeleteNotesWindow) {
-            canceWindow(GetData.getDeleteNotesWindow());
-        }
-
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
     
     public ObservableList<Notes> getNotesFromDatabase() {
         ObservableList<Notes>dataList=FXCollections.observableArrayList();
-        String sql = "SELECT title,date,content FROM notes WHERE username=?";
+        String sql = "SELECT id,title,date,content FROM notes WHERE username=?";
         connect = Database.Connect();
 
         try {
@@ -104,6 +75,7 @@ public class CRUDController implements Initializable {
 
             while (result.next()) {
                 Notes notes=new Notes(
+                        result.getInt("id"),
                         result.getString("title"),
                         result.getDate("date"),
                         result.getString("content")
@@ -119,7 +91,7 @@ public class CRUDController implements Initializable {
     ObservableList<Notes>notesList;
     private void addNotes() {
         Alert alert;
-        if(titleAddNotesWindow.getText().isEmpty() || contentAddNotesWindow.getText().isEmpty()){
+        if(title.getText().isEmpty() || content.getText().isEmpty()){
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -132,14 +104,14 @@ public class CRUDController implements Initializable {
             try {
                 prepare=connect.prepareStatement(sql);
                 prepare.setString(1, GetData.getUsername());
-                prepare.setString(2, titleAddNotesWindow.getText());
+                prepare.setString(2, title.getText());
                 
                 
                 Date date=new Date();
                 java.sql.Date sqlDate=new java.sql.Date(date.getTime());
                 
                 prepare.setString(3, sqlDate.toString());
-                prepare.setString(4, contentAddNotesWindow.getText());
+                prepare.setString(4, content.getText());
                 
                 prepare.executeUpdate();
                 
@@ -149,8 +121,8 @@ public class CRUDController implements Initializable {
                 alert.setContentText("Note was successfully added!");
                 alert.showAndWait();
                 
-                titleAddNotesWindow.setText("");
-                contentAddNotesWindow.setText("");
+                title.setText("");
+                content.setText("");
                 
                 
                 GetData.getAddNotesWindow().close();
@@ -161,7 +133,7 @@ public class CRUDController implements Initializable {
                 
                 
             } catch (SQLException ex) {
-                Logger.getLogger(CRUDController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AddController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             
@@ -170,15 +142,15 @@ public class CRUDController implements Initializable {
 
     }
 
-    private void updateNotes() {
-    }
-
-    private void deleteNotes() {
-
-    }
-
     private void canceWindow(Stage stage) {
         stage.close();
+    }
+    
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+
     }
 
 }

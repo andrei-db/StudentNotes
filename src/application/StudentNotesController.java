@@ -121,7 +121,7 @@ public class StudentNotesController implements Initializable {
 
     public ObservableList<Notes> getNotesFromDatabase() {
         ObservableList<Notes>dataList=FXCollections.observableArrayList();
-        String sql = "SELECT title,date,content FROM notes WHERE username=?";
+        String sql = "SELECT id,title,date,content FROM notes WHERE username=?";
         connect = Database.Connect();
 
         try {
@@ -131,6 +131,7 @@ public class StudentNotesController implements Initializable {
 
             while (result.next()) {
                 Notes notes=new Notes(
+                        result.getInt("id"),
                         result.getString("title"),
                         result.getDate("date"),
                         result.getString("content")
@@ -170,8 +171,9 @@ public class StudentNotesController implements Initializable {
 
                         @Override
                         public void handle(ActionEvent t) {
-                           
+                            GetData.setCurrentItem(item);
                             updateNotesWindow();
+                           
                         }
                     });
 
@@ -179,8 +181,9 @@ public class StudentNotesController implements Initializable {
 
                         @Override
                         public void handle(ActionEvent t) {
-                            
+                             GetData.setCurrentItem(item);
                             deleteNotesWindow();
+                           
                         }
                     });
                     if (!empty) {
