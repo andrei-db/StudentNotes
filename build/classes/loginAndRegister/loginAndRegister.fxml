@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginAndRegister.LoginAndRegisterController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane layoutX="5.0" layoutY="9.0" prefHeight="273.0" prefWidth="329.0" styleClass="login-form" stylesheets="@loginAndRegisterDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TextField fx:id="usernameLogin" layoutX="42.0" layoutY="147.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="105.0" layoutY="119.0" text="Username" textFill="#4568dc">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="108.0" layoutY="186.0" text="Password" textFill="#4568dc">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="111.0" layoutY="31.0" text="Login" textFill="#4568dc">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="loginBtn" layoutX="108.0" layoutY="295.0" mnemonicParsing="false" onAction="#loginAndRegisterButtonsOnAction" prefHeight="39.0" prefWidth="86.0" styleClass="login-btn" stylesheets="@loginAndRegisterDesign.css" text="Login" textFill="#02aab0">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Button>
+                  <PasswordField fx:id="passwordLogin" layoutX="42.0" layoutY="214.0" prefHeight="31.0" prefWidth="217.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="306.0" layoutY="51.0" prefHeight="231.0" prefWidth="218.0" styleClass="register-form" stylesheets="@loginAndRegisterDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="105.0" layoutY="119.0" text="Username" textFill="#02aab0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="108.0" layoutY="186.0" text="Password" textFill="#02aab0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="93.0" layoutY="36.0" text="Register" textFill="#02aab0">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameRegister" layoutX="46.0" layoutY="147.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Button fx:id="registerBtn" layoutX="100.0" layoutY="294.0" mnemonicParsing="false" onAction="#loginAndRegisterButtonsOnAction" prefHeight="45.0" prefWidth="116.0" styleClass="register-btn" stylesheets="@loginAndRegisterDesign.css" text="Register" textFill="#4568dc">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Button>
+                  <PasswordField fx:id="passwordRegister" layoutX="43.0" layoutY="214.0" prefHeight="31.0" prefWidth="224.0" />
+               </children>
+            </AnchorPane>
+            <Button mnemonicParsing="false" onAction="#close" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <FontAwesomeIcon glyphName="CLOSE" />
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
